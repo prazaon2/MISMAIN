@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=source/applicationControl.c source/platformMainMK.c source/filtr.c
+SOURCEFILES_QUOTED_IF_SPACED=source/applicationControl.c source/platformMainMK.c source/filtr.c source/memory.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/source/applicationControl.o ${OBJECTDIR}/source/platformMainMK.o ${OBJECTDIR}/source/filtr.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/source/applicationControl.o.d ${OBJECTDIR}/source/platformMainMK.o.d ${OBJECTDIR}/source/filtr.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/source/applicationControl.o ${OBJECTDIR}/source/platformMainMK.o ${OBJECTDIR}/source/filtr.o ${OBJECTDIR}/source/memory.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/source/applicationControl.o.d ${OBJECTDIR}/source/platformMainMK.o.d ${OBJECTDIR}/source/filtr.o.d ${OBJECTDIR}/source/memory.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/source/applicationControl.o ${OBJECTDIR}/source/platformMainMK.o ${OBJECTDIR}/source/filtr.o
+OBJECTFILES=${OBJECTDIR}/source/applicationControl.o ${OBJECTDIR}/source/platformMainMK.o ${OBJECTDIR}/source/filtr.o ${OBJECTDIR}/source/memory.o
 
 # Source Files
-SOURCEFILES=source/applicationControl.c source/platformMainMK.c source/filtr.c
+SOURCEFILES=source/applicationControl.c source/platformMainMK.c source/filtr.c source/memory.c
 
 
 
@@ -119,6 +119,12 @@ ${OBJECTDIR}/source/filtr.o: source/filtr.c  .generated_files/flags/default/5e7f
 	@${RM} ${OBJECTDIR}/source/filtr.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/source/filtr.o.d" -o ${OBJECTDIR}/source/filtr.o source/filtr.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
+${OBJECTDIR}/source/memory.o: source/memory.c  .generated_files/flags/default/1a59d9b7035494022169854cf603ebe19208ac3a .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/source" 
+	@${RM} ${OBJECTDIR}/source/memory.o.d 
+	@${RM} ${OBJECTDIR}/source/memory.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/source/memory.o.d" -o ${OBJECTDIR}/source/memory.o source/memory.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
 else
 ${OBJECTDIR}/source/applicationControl.o: source/applicationControl.c  .generated_files/flags/default/169c73a919bc46b362dea95ec2f4b9841fe3486b .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}/source" 
@@ -137,6 +143,12 @@ ${OBJECTDIR}/source/filtr.o: source/filtr.c  .generated_files/flags/default/a9a0
 	@${RM} ${OBJECTDIR}/source/filtr.o.d 
 	@${RM} ${OBJECTDIR}/source/filtr.o 
 	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/source/filtr.o.d" -o ${OBJECTDIR}/source/filtr.o source/filtr.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/source/memory.o: source/memory.c  .generated_files/flags/default/680c2749869f1ecbf6e14f11500839f10cafb9c .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}/source" 
+	@${RM} ${OBJECTDIR}/source/memory.o.d 
+	@${RM} ${OBJECTDIR}/source/memory.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -fno-common -MP -MMD -MF "${OBJECTDIR}/source/memory.o.d" -o ${OBJECTDIR}/source/memory.o source/memory.c    -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 endif
 

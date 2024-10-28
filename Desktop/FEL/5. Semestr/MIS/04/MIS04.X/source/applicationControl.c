@@ -43,16 +43,27 @@
 //--- Global vars -------------------------------------------------------------
 
 //--- External vars -----------------------------------------------------------
-// zde deklaruju globální prom?ný
+// zde deklaruju globální promeny
 filtr_ filtrS1; 
-    
+filtr_ filtrS2;
+filtr_ filtrA;  
+filtr_ filtrB; 
 //---- Functions --------------------------------------------------------------
 
 void configApplication(void){//------------------------------------------------
   //--- User defined functions ---
-    // tady je inicializuju
-    filtrS1.vystup = 0;
+    // tady inicializuju promeny
+    filtrS1.vystup = 0;     //inicializace pro filtr tlacitka S1
     filtrS1.stav = 0;
+    
+    filtrS2.vystup = 0;     //inicializace pro filtr tlacitka S2
+    filtrS2.stav = 0;
+    
+    filtrA.vystup = 0;      //inicializace pro filtr koderu kanal A 
+    filtrA.stav = 0;
+    
+    filtrB.vystup = 0;      //inicializace pro filtr koderu kanal B 
+    filtrB.stav = 0;
     // initFiltr(&filtrS1);
   
 }// configApplication() END 
@@ -62,8 +73,10 @@ void configApplication(void){//------------------------------------------------
 void runApplication(void) {//--------------------------------------------------
   // sem volat moje funkce
     filtr(&filtrS1,getButtonS1());
-   
-    setLedV2(1);
+    filtr(&filtrS2,getButtonS2());
+    filtr(&filtrA,getCoderChannelA());
+    filtr(&filtrB,getCoderChannelB());
+    
     
 }// runApplication() END)
 

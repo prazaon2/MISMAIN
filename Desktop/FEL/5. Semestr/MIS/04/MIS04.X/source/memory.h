@@ -17,6 +17,7 @@
 
 #ifndef _MEMORY_H    /* Guard against multiple inclusion */
 #define _MEMORY_H
+#include <stdbool.h>
 
 
 /* ************************************************************************** */
