@@ -14,7 +14,7 @@
     Describe the purpose of this file.
  */
 #include "filtr.h"
-
+#include <stdbool.h>
 
 
 void filtr(filtr_* filtr, bool vstup) { //funkce filtru (ukazatel na promenou ktera ukazuje stav a vystup tlacitka, hodonta pricházejici z tlacitka)

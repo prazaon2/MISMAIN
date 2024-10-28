@@ -42,22 +42,57 @@
     
 
 #include "memory.h"
-
+#include <stdbool.h>
 
 
 void mem(mem_* mem, bool vstup) { //funkce pameti (ukazatel na promenou ktera ukazuje stav a vystup filtrovaneho tlacitka, hodonta pricházejici z filtru)
     // tady pisu tu funkci :)
     switch(mem->stav){
-        case 0:
+        case 0:         
         {
             if(vstup==1) {
-                filtr->stav = 1;
+                mem->stav = 1;
             }
             else{
-                filtr->stav = 3;
+                mem->vystup = 0;
             }
+            
             break;
         }    
-        
+        case 1:             // kdyz tlcitko stale drzim jsem setrvávám ve stavu 1 a vystup je 1
+        {
+            mem->vystup = 1;
+            if(vstup==1) {
+                mem->stav = 1;
+            }
+            else{                               // kdyz tlacitko pustim jdu do stavu 2
+                mem->stav = 2;
+            }
+
+            break;
+        }    
+        case 2:                 // zde pokud je tlacitko stale pustene tak se nic nem?ní a jsem zacyklen zde
+        {
+            if(vstup==1) {      // pokud vsak zmacknu tlacitko posunu se na stav 3
+                mem->stav = 3;
+            }
+            else{
+                mem->stav = 2;
+            }
+           
+            break;
+        }    
+        case 3:             // zde doslo k opakovanemu stisknuti tlacitka tedy je nutno zmenit vystup na 0
+        {
+            mem->vystup = 0;
+            if(vstup==1) {          // pokud tlacitko porad drzim nic se ned?je a vystup zustava 0
+                mem->stav = 3;
+            }
+            else{                      // pokud tlacitko pustim jdu na stav 0 a cely cyklus se opakuje
+                mem->stav = 0;
+            }
+
+            break;
+        }    
     }
 }
