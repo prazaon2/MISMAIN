@@ -26,6 +26,7 @@
 #include <sys/attribs.h>
 #include "platformMIS32mk.h"
 #include "filtr.h"
+#include "memory.h"
 
 //-- latform Function prototypes are in "platrformDEP32mk" ---------------------
 
@@ -48,6 +49,8 @@ filtr_ filtrS1;
 filtr_ filtrS2;
 filtr_ filtrA;  
 filtr_ filtrB; 
+mem_ memS1;
+mem_ memS2;
 //---- Functions --------------------------------------------------------------
 
 void configApplication(void){//------------------------------------------------
@@ -64,6 +67,12 @@ void configApplication(void){//------------------------------------------------
     
     filtrB.vystup = 0;      //inicializace pro filtr koderu kanal B 
     filtrB.stav = 0;
+    
+    memS1.vystup = 0;      //inicializace pro pamet tlacitka S1 
+    memS1.stav = 0;
+    
+    memS2.vystup = 0;      //inicializace pro pamet tlacitka S2 
+    memS2.stav = 0;
     // initFiltr(&filtrS1);
   
 }// configApplication() END 
@@ -72,11 +81,12 @@ void configApplication(void){//------------------------------------------------
 
 void runApplication(void) {//--------------------------------------------------
   // sem volat moje funkce
-    filtr(&filtrS1,getButtonS1());
-    filtr(&filtrS2,getButtonS2());
-    filtr(&filtrA,getCoderChannelA());
-    filtr(&filtrB,getCoderChannelB());
     
+   
+    setCoderLedA(filtr(&filtrA,getCoderChannelA())); //funkce spoustejici LED A koderu dle toho jaka filtorvana hodnota vyjde z A vystupu
+    setCoderLedB(filtr(&filtrB,getCoderChannelB())); //funkce spoustejici LED B koderu dle toho jaka filtorvana hodnota vyjde z B vystupu
+    setLedV1(mem(&memS1,filtr(&filtrS1,getButtonS1()))); //funkce spoustejici LED V1 dle toho jaka hodnoto vyjde z pameti do ktere vstupuje filtrovany vystup tlacitka S1
+    setLedV2(mem(&memS2,filtr(&filtrS2,getButtonS2()))); //funkce spoustejici LED V2 dle toho jaka hodnota vyjde z pameti do ktere vstupuje filtorvany vystup tlacitka S2
     
 }// runApplication() END)
 
