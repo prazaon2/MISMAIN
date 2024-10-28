@@ -19,7 +19,7 @@
 #define _FILTR_H
 #include <stdbool.h>
 
-enum {s0,s1,s2,s3,s4};
+
 
 typedef struct filtr_{
     bool vystup;
