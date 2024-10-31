@@ -54,7 +54,7 @@ void mem(mem_* mem, bool vstup) { //funkce pameti (ukazatel na promenou ktera uk
                 mem->stav = 1;
             }
             else{
-                mem->vystup = 0;
+                mem->stav = 0;
             }
             
             break;
