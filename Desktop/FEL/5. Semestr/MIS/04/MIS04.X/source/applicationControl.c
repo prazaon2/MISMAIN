@@ -44,7 +44,7 @@
 //--- Global vars -------------------------------------------------------------
 
 //--- External vars -----------------------------------------------------------
-// zde deklaruju globální promeny
+// zde deklaruju globalni promenne
 filtr_ filtrS1; 
 filtr_ filtrS2;
 filtr_ filtrA;  
