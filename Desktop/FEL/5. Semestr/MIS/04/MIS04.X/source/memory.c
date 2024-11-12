@@ -45,8 +45,10 @@
 #include <stdbool.h>
 
 
+
 void mem(mem_* mem, bool vstup) { //funkce pameti (ukazatel na promenou ktera ukazuje stav a vystup filtrovaneho tlacitka, hodonta pricházejici z filtru)
     
+  
     switch(mem->stav){
         case 0:         
         {
