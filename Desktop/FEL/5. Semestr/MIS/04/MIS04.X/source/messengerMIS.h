@@ -16,8 +16,6 @@
 #include <stdbool.h>
 
 
-//nerozumim tomu proc mi to nejde nahrat do gitu
-
 #define MSG_LEN_IX              0
 #define RX_MESSAGE_LENGTH_MASK  0x3F
 #define RX_FROM_TEXT_TERMINAL   0x40 

@@ -67,7 +67,7 @@ int global_data;
     banner.
  */
 
-#include "messengerMIS.h"
+#include "messengerMIS.h"   //knihovna z moodlu
 #include "rtm.h"
 #include <stdbool.h>
 #include <stdio.h>
@@ -76,7 +76,7 @@ unsigned char recBuf[40];  //inicializace pole prichozi zpravy
 unsigned char sendBuf[40];  //inicializace pole obsahujiciho odesilanou zpravu
 
 
-void rtm(bool mem_S1, bool mem_S2) { 
+void rtm(bool mem_S1, bool mem_S2) { //inicializace funkce vstupem jsou funkce mem - pameti tlacitek
     
     static int delay = 0; 
     static char delka = 0;
@@ -106,8 +106,8 @@ void rtm(bool mem_S1, bool mem_S2) {
                 case 2:         //COM2 odesilej hodnotu tlacitek s pameti
                 {
                     sendBuf[0]= Two_Int_Len;  //uvedeni delky zpravy
-                    integerToBytes(mem_S1,&sendBuf[1]); //priprava zpravy
-                    integerToBytes(mem_S2,&sendBuf[3]);//priprava zpravy
+                    integerToBytes(mem_S1*1000,&sendBuf[1]); //priprava zpravy... hodnotu nasobim tisicem aby byla dobre videt v zobrazovacim SW na PC
+                    integerToBytes(mem_S2*1000,&sendBuf[3]);//priprava zpravy... hodnotu nasobim tisicem aby byla dobre videt v zobrazovacim SW na PC
                     sendMessageUSB(sendBuf,0); //odeslani do PC
                     break;
                 }
