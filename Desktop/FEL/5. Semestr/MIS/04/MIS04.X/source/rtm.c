@@ -81,6 +81,7 @@ void rtm(bool mem_S1, bool mem_S2) {
     static int delay = 0; 
     static char delka = 0;
     static char typ = 0;
+    static int stav_tabulka = 0;
   
     
     delay = delay+1; //inkcementace
@@ -91,30 +92,53 @@ void rtm(bool mem_S1, bool mem_S2) {
             delka = recBuf[0];  // na pozici 0 se nachazi informace o delce zpravy. Bude se hodit kdyz budu chtit pridat kontrolu prijate zpravy
             typ = recBuf[1];    //na pozici 1 se nachazi informace o typu prijate zpravy => jaky COM jsem vybral na PC
             
-            switch (typ){   
+            switch(typ){   
                 case 0:{    //COM0 preruseni komunikace
                     break;
                 }
                 case 1:         //COM1 odesilej hodnotu potenciometru
                 {
-                    sendBuf[0]= One_Int_Len;
-                    integerToBytes(getPotentiometerValue(),&sendBuf[1]);
-                    sendMessageUSB(sendBuf,0);
+                    sendBuf[0]= One_Int_Len; //uvedeni delky zpravy
+                    integerToBytes(getPotentiometerValue(),&sendBuf[1]); //priprava zpravy
+                    sendMessageUSB(sendBuf,0); //odeslani do PC
                     break;
                 }
                 case 2:         //COM2 odesilej hodnotu tlacitek s pameti
                 {
-                    sendBuf[0]= Two_Int_Len;
-                    integerToBytes(mem_S1,&sendBuf[1]);
-                    integerToBytes(mem_S2,&sendBuf[3]);
-                    sendMessageUSB(sendBuf,0);
+                    sendBuf[0]= Two_Int_Len;  //uvedeni delky zpravy
+                    integerToBytes(mem_S1,&sendBuf[1]); //priprava zpravy
+                    integerToBytes(mem_S2,&sendBuf[3]);//priprava zpravy
+                    sendMessageUSB(sendBuf,0); //odeslani do PC
                     break;
                 }
-                case 3:     //COM3 tabulka
+                case 3:     //COM3 tabulka - jalikoz nelze zapsat vice bunek najednou tak kazdy cyklus 40ms zapise jednu bunku
                 {
-                    sprintf(sendBuf,"Hodnota AD = %d", getPotentiometerValue());
-                    sendTableTerminalMessageUSB("1A",sendBuf);
+                    
+                    switch(stav_tabulka){
+                        case 0: //zapis prvni bunky
+                        {    
+                            sprintf(sendBuf,"Hodnota AD = %d", getPotentiometerValue()); //za %d se dosadi hodnota potenciometru
+                            sendTableTerminalMessageUSB("1A",sendBuf); //odesle zpravu do prvni bunky tabulky
+                            stav_tabulka = 1;
+                            break;
+                        }
+                        case 1:         //zapis druhe bunky
+                        {
+                            sprintf(sendBuf,"Tlacitko S1 = %d", mem_S1); //za %d se dosadi hodnota memS1
+                            sendTableTerminalMessageUSB("2A",sendBuf); //odesle zpravu do druhe bunky tabulky 
+                            stav_tabulka = 2;
+                            break;
+                        }
+                        case 2:         //zapis treti bunky
+                        {
+                            sprintf(sendBuf,"Tlacitko S2 = %d", mem_S2); //za %d se dosadi hodnota memS2
+                            sendTableTerminalMessageUSB("3A",sendBuf); //odesle zpravu do treti bunky tabulky 
+                            stav_tabulka = 0;
+                            break;
+                        }
+                    
                     break;
+                    }
                 }
             }
     }  
