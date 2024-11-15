@@ -78,9 +78,20 @@ unsigned char sendBuf[40];
 
 void messenger(bool mem_S1, bool mem_S2) { 
     
+    static int delay = 0;
+    static char delka = 0;
+    static char typ = 0;
+  
     
+    delay = delay+1;
+    
+    if(delay == 40){
+        
+        getMessageUSB(recBuf,0);
+            delka = recBuf[0];
+            typ = recBuf[1];
             
-            
+    }  
 }
         
         
