@@ -85,12 +85,37 @@ void messenger(bool mem_S1, bool mem_S2) {
     
     delay = delay+1;
     
-    if(delay == 40){
+    if(delay >= 40){
         
         getMessageUSB(recBuf,0);
             delka = recBuf[0];
             typ = recBuf[1];
-            
+            switch (typ){
+                case 0:{
+                    break;
+                }
+                case 1:
+                {
+                    sendBuf[0]= One_Int_Len;
+                    integerToBytes(getPotentiometerValue(),&sendBuf[1]);
+                    sendMessageUSB(sendBuf,0);
+                    break;
+                }
+                case 2:
+                {
+                    sendBuf[0]= Two_Int_Len;
+                    integerToBytes(mem_S1,&sendBuf[1]);
+                    integerToBytes(mem_S2,&sendBuf[3]);
+                    sendMessageUSB(sendBuf,0);
+                    break;
+                }
+                case 3:
+                {
+                    sprintf(sendBuf,"Hodnota AD = %d", getPotentiometerValue());
+                    sendTableTerminalMessageUSB("1A",sendBuf);
+                    break;
+                }
+            }
     }  
 }
         
