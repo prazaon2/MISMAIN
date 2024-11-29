@@ -55,11 +55,11 @@ filtr_ filtrA;
 filtr_ filtrB; 
 mem_ memS1;
 mem_ memS2;
-dekoder_ dekoderDEK;
-int potenciometrPOT;
-int celkovy_vystup;
-int svitiV9;
-int svitiV12;
+dekoder_ dekoderDEK;        //promena pro hodnotu dekoderu
+int potenciometrPOT;        //promena pro hodnotu potenciometru
+int celkovy_vystup;         //promena pro hodnotu vystupu po zvoleni dekoderu nebo potenciometru
+int svitiV9;                //pomocna promena pro zobrazeni stavu LEDV9 v RTM
+int svitiV12;               //pomocna promena pro zobrazeni stavu LEDV12 v RTM
 
 
 //---- Functions --------------------------------------------------------------
@@ -122,7 +122,7 @@ void runApplication(void) {//--------------------------------------------------
     
    
     dekoder(&dekoderDEK, filtrA.vystup, filtrB.vystup);     //volani fukce dekoderu - urci smer a dle nej pricita/odecita pocet hran kvadraturniho signalu na intervalu 0 az 255
-    potenciometr(&potenciometrPOT);                         // volani funkce potenciometru - precte hodnotu potenciometru a tu upravi do zadaneho intervalu
+    potenciometr(&potenciometrPOT);                         // volani funkce potenciometru - precte hodnotu potenciometru a tu upravi do zadaneho intervalu 0 az 255
     
     
     
@@ -138,15 +138,15 @@ void runApplication(void) {//--------------------------------------------------
     }
     //----------------------------------------------------------------------------------------------------------------------
     
-    setFpgaVxValue(celkovy_vystup); //rozvici led 13 az 24 dle celkove vystupni hodnoty
+    setFpgaVxValue(celkovy_vystup); //rozsvici led 13 az 24 dle celkove vystupni hodnoty
     
-    //---------zde se rozvici/zahsina led V9 a V12 pri dosazeni maxima/minima celkove vystupni hodnoty------------------------------------------------------
+    //---------zde se rozsvici/zahsina led V9 a V12 pri dosazeni maxima/minima celkove vystupni hodnoty------------------------------------------------------
    
     if (celkovy_vystup <= 0){               //rozsviti LEDV9 kdyz je hodnota potenciometru/dekoderu minimalni
         setCoderLedLL(1);
         svitiV9 = 1;
     }
-    else if (celkovy_vystup > 0){       //zhasne LEDV9 kdyz je hodnota potenciometru/dekoderu maximalni
+    else if (celkovy_vystup > 0){       //zhasne LEDV9 kdyz neni hodnota potenciometru/dekoderu minimalni
         setCoderLedLL(0);
         svitiV9 = 0;
     }
@@ -155,7 +155,7 @@ void runApplication(void) {//--------------------------------------------------
         setCoderLedHL(1);
         svitiV12 = 1;
     }
-    else if (celkovy_vystup < 255){         //zhasne LEDV12 kdyz je hodnota potenciometru/dekoderu maximalni
+    else if (celkovy_vystup < 255){         //zhasne LEDV12 kdyz neni hodnota potenciometru/dekoderu maximalni
         setCoderLedHL(0);
         svitiV12 = 0;
     }

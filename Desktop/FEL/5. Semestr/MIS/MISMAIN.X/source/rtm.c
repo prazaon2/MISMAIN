@@ -69,8 +69,8 @@ int global_data;
 
 #include "messengerMIS.h"   //knihovna z moodlu
 #include "rtm.h"
-#include <stdbool.h>
-#include <stdio.h>
+#include <stdbool.h>        //knihovna potrebna pro datovy typ bool
+#include <stdio.h>          //knihovna potrebna pro sprintf
 #include "platformMIS32mk.h"
 
 unsigned char recBuf[40];  //inicializace pole prichozi zpravy

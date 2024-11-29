@@ -15,18 +15,18 @@
  */
 /* ************************************************************************** */
 
-#ifndef _POTENCIOMETR_H    /* Guard against multiple inclusion */
-#define _POTENCIOMETR_H
+#ifndef _DEKODER_H    /* Guard against multiple inclusion */
+#define _DEKODER_H
 
+#include <stdbool.h>
 
-#include "platformMIS32mk.h"
+typedef struct dekoder_ {
+    int hodnota_dek;
+    char stav;
 
-#define Max_Hodnota_Re 2047     //maximalni hodnota kterou natocim na potenciometru
-#define Max_Hodnota_Pre 255     //maximalni hodnota po prepoctu intervalu
-
+    } dekoder_;
     
-void potenciometr(int* hodnota_pot_u);
-
+void dekoder(dekoder_* dekoder, int vstupA, int vstupB);
 
 
 

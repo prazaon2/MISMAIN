@@ -25,8 +25,8 @@
 void potenciometr(int* hodnota_pot_u) { // funkce prepoctu potenciometru z hodnoty -2047 az 2047 na 0 az 255
     
     
-    static int realna_hodnota_pot = 0;
-    static int pot = 0;
+    static int realna_hodnota_pot = 0; 
+    static int pot = 0; //pomocna promena pro odstraneni zapornych hodnot intervalu
     
     
     realna_hodnota_pot = getPotentiometerValue(); //ulozim realnou hodnotu potenciometru
