@@ -116,29 +116,42 @@ void runApplication(void) {//--------------------------------------------------
     setLedV2(memS2.vystup); 
     
    
-    dekoder(&dekoderDEK, filtrA.vystup, filtrB.vystup);
-    potenciometr(&potenciometrPOT);
+    dekoder(&dekoderDEK, filtrA.vystup, filtrB.vystup);     //volani fukce dekoderu - urci smer a dle nej pricita/odecita pocet hran kvadraturniho signalu na intervalu 0 az 255
+    potenciometr(&potenciometrPOT);                         // volani funkce potenciometru - precte hodnotu potenciometru a tu upravi do zadaneho intervalu
     
-    if((memS2.vystup) == 1){
+    
+    
+    
+    //----------------------zde rozhoduje zda je nastaven dekoder nebo poteciometr------------------------------------------------------
+    
+    if((memS2.vystup) == 1){                                
         celkovy_vystup = dekoderDEK.hodnota_dek;
     }
     
     else if((memS2.vystup) == 0){
         celkovy_vystup = potenciometrPOT;
     }
+    //----------------------------------------------------------------------------------------------------------------------
     
-    if (celkovy_vystup <= 0){
+    setFpgaVxValue(celkovy_vystup); //rozvici led 13 az 24 dle celkove vystupni hodnoty
+    
+    //---------zde se rozvici/zahsina led V9 a V12 pri dosazeni maxima/minima celkove vystupni hodnoty------------------------------------------------------
+   
+    if (celkovy_vystup <= 0){               //rozsviti LEDV9 kdyz je hodnota potenciometru/dekoderu minimalni
         setCoderLedLL(1);
     }
-    else if (celkovy_vystup > 0){
+    else if (celkovy_vystup > 0){       //zhasne LEDV9 kdyz je hodnota potenciometru/dekoderu maximalni
         setCoderLedLL(0);
     }
-    else if (celkovy_vystup >= 255){
+    
+    if (celkovy_vystup >= 255){        //rozsviti LEDV12 kdyz je hodnota potenciometru/dekoderu maximalni
         setCoderLedHL(1);
     }
-    else if (celkovy_vystup < 255){
+    else if (celkovy_vystup < 255){         //zhasne LEDV12 kdyz je hodnota potenciometru/dekoderu maximalni
         setCoderLedHL(0);
     }
+  //----------------------------------------------------------------------------------------------------------------------  
+    
     
     rtm(memS1.vystup, memS2.vystup); //volani funkce RTM 40ms delay je implementovan uvnitr funkce
     
