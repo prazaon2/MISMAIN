@@ -21,6 +21,9 @@
 
 #include "platformMIS32mk.h"
 
+#define Max_Hodnota_Re 2047     //maximalni hodnota kterou natocim na potenciometru
+#define Max_Hodnota_Pre 255     //maximalni hodnota po prepoctu intervalu
+
     
 void potenciometr(int* hodnota_pot_u);
 

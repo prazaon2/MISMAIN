@@ -22,10 +22,19 @@
 
 
 
-void potenciometr(int* hodnota_pot_u) { 
+void potenciometr(int* hodnota_pot_u) { // funkce prepoctu potenciometru z hodnoty -2047 a? 2047 na 0 a? 255
     
-
     
+    static int realna_hodnota_pot = 0;
+    static int pot = 0;
+    
+    
+    realna_hodnota_pot = getPotentiometerValue(); //ulozim realnou hodnotu potenciometru
+    
+    pot = realna_hodnota_pot + Max_Hodnota_Re;  //z itervalu -2047 az 2047 udelam interval 0 az 4096
+    
+    *hodnota_pot_u = (Max_Hodnota_Pre*pot)/(Max_Hodnota_Re*2);  //pomoci trojclenky prepocitam na zadany interval ovsem jmenovatel musim nasobit dvemi kvuli predeslemu pricteni hodnoty
+                                                                // vystup funkce je realizovan pomoci ukazatele - dereferencovani
 }
 
 /* ****************
