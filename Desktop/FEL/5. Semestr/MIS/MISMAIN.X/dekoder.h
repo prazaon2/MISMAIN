@@ -25,6 +25,8 @@ typedef struct dekoder_ {
     char stav;
 
     } dekoder_;
+    
+void dekoder(dekoder_* dekoder, int vstupA, int vstupB);
 
 
 
