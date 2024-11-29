@@ -105,7 +105,7 @@ void runApplication(void) {//--------------------------------------------------
     setLedV2(memS2.vystup); 
     
    
-    rtm(memS1.vystup, memS2.vystup,); //volani funkce RTM 40ms delay je implementovan uvnitr funkce
+    rtm(memS1.vystup, memS2.vystup); //volani funkce RTM 40ms delay je implementovan uvnitr funkce
     
     
     
