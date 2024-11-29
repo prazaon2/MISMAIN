@@ -98,18 +98,20 @@ void rtm(bool mem_S1, bool mem_S2, int sviti9, int sviti12, int POT_DEK) { //ini
                     
                     break;
                 }
-                case 1:         //COM1 odesilej hodnotu potenciometru
+                case 1:         //COM1 odesilej hodnotu potenciometru/dekoderu a stavy na ledkach ukazujici maximum a minimum
                 {
-                    sendBuf[0]= One_Int_Len; //uvedeni delky zpravy
-                    integerToBytes(getPotentiometerValue(),&sendBuf[1]); //priprava zpravy
+                    sendBuf[0]= Three_Int_Len; //uvedeni delky zpravy
+                    integerToBytes(POT_DEK,&sendBuf[1]); //priprava zpravy z potenciometru/dekoderu
+                    integerToBytes(sviti9*100,&sendBuf[3]); //priprava zpravy... hodnotu nasobim stem aby byla dobre videt v zobrazovacim SW na PC v porovnani s POT_DEK
+                    integerToBytes(sviti12*100,&sendBuf[1]); //priprava zpravy... hodnotu nasobim stem aby byla dobre videt v zobrazovacim SW na PC v porovnani s POT_DEK
                     sendMessageUSB(sendBuf,0); //odeslani do PC
                     break;
                 }
-                case 2:         //COM2 odesilej hodnotu tlacitek s pameti
+                case 2:         //COM2 odesilej hodnotu tlacitek s pameti //zde stejne jako v predchozim ukolu
                 {
                     sendBuf[0]= Two_Int_Len;  //uvedeni delky zpravy
-                    integerToBytes(mem_S1*1000,&sendBuf[1]); //priprava zpravy... hodnotu nasobim tisicem aby byla dobre videt v zobrazovacim SW na PC
-                    integerToBytes(mem_S2*1000,&sendBuf[3]);//priprava zpravy... hodnotu nasobim tisicem aby byla dobre videt v zobrazovacim SW na PC
+                    integerToBytes(mem_S1*100,&sendBuf[1]); //priprava zpravy... hodnotu nasobim stem aby byla dobre videt v zobrazovacim SW na PC
+                    integerToBytes(mem_S2*100,&sendBuf[3]);//priprava zpravy... hodnotu nasobim stem aby byla dobre videt v zobrazovacim SW na PC
                     sendMessageUSB(sendBuf,0); //odeslani do PC
                     break;
                 }
@@ -119,22 +121,36 @@ void rtm(bool mem_S1, bool mem_S2, int sviti9, int sviti12, int POT_DEK) { //ini
                     switch(stav_tabulka){
                         case 0: //zapis prvni bunky
                         {    
-                            sprintf(sendBuf,"Hodnota AD = %d", getPotentiometerValue()); //za %d se dosadi hodnota potenciometru
+                            sprintf(sendBuf,"Hodnota AD = %d", POT_DEK); //za %d se dosadi hodnota potenciometru
                             sendTableTerminalMessageUSB("1A",sendBuf); //odesle zpravu do prvni bunky tabulky
                             stav_tabulka = 1;
                             break;
                         }
                         case 1:         //zapis druhe bunky
                         {
-                            sprintf(sendBuf,"Tlacitko S1 = %d", mem_S1); //za %d se dosadi hodnota memS1
+                            sprintf(sendBuf,"LED V1 = %d", mem_S1); //za %d se dosadi hodnota memS1
                             sendTableTerminalMessageUSB("2A",sendBuf); //odesle zpravu do druhe bunky tabulky 
                             stav_tabulka = 2;
                             break;
                         }
                         case 2:         //zapis treti bunky
                         {
-                            sprintf(sendBuf,"Tlacitko S2 = %d", mem_S2); //za %d se dosadi hodnota memS2
+                            sprintf(sendBuf,"LED V2 = %d", mem_S2); //za %d se dosadi hodnota memS2
                             sendTableTerminalMessageUSB("3A",sendBuf); //odesle zpravu do treti bunky tabulky 
+                            stav_tabulka = 3;
+                            break;
+                        }
+                         case 3:         //zapis ctvrte bunky
+                        {
+                            sprintf(sendBuf,"LED V9 = %d", sviti9); //za %d se dosadi hodnota sviti9
+                            sendTableTerminalMessageUSB("2C",sendBuf); //odesle zpravu do druhe bunky tretiho sloupce tabulky 
+                            stav_tabulka = 4;
+                            break;
+                        }
+                          case 4:         //zapis pate bunky
+                        {
+                            sprintf(sendBuf,"LEDV12 = %d", sviti12); //za %d se dosadi hodnota sviti12
+                            sendTableTerminalMessageUSB("3C",sendBuf); //odesle zpravu treti bunky tretiho sloupce tabulky
                             stav_tabulka = 0;
                             break;
                         }
