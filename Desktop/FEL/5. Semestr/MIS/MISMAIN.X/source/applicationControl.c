@@ -28,6 +28,8 @@
 #include "filtr.h"
 #include "memory.h"
 #include "rtm.h"
+#include "dekoder.h"
+#include "potenciometr.h"
 
 
 //-- latform Function prototypes are in "platrformDEP32mk" ---------------------
@@ -53,6 +55,9 @@ filtr_ filtrA;
 filtr_ filtrB; 
 mem_ memS1;
 mem_ memS2;
+dekoder_ dekoderDEK;
+int potenciometrPOT;
+int celkovy_vystup;
 
 
 //---- Functions --------------------------------------------------------------
@@ -78,7 +83,13 @@ void configApplication(void){//------------------------------------------------
     memS2.vystup = 0;      //inicializace pro pamet tlacitka S2 
     memS2.stav = 0;
     
-    // initFiltr(&filtrS1);
+    dekoderDEK.hodnota_dek = 0;
+    dekoderDEK.stav = 0;
+    
+    potenciometrPOT = 0;
+    
+    celkovy_vystup = 0;
+    
   
 }// configApplication() END 
 
@@ -105,6 +116,30 @@ void runApplication(void) {//--------------------------------------------------
     setLedV2(memS2.vystup); 
     
    
+    dekoder(&dekoderDEK, filtrA.vystup, filtrB.vystup);
+    potenciometr(&potenciometrPOT);
+    
+    if((memS2.vystup) == 1){
+        celkovy_vystup = dekoderDEK.hodnota_dek;
+    }
+    
+    else if((memS2.vystup) == 0){
+        celkovy_vystup = potenciometrPOT;
+    }
+    
+    if (celkovy_vystup <= 0){
+        setCoderLedLL(1);
+    }
+    else if (celkovy_vystup > 0){
+        setCoderLedLL(0);
+    }
+    else if (celkovy_vystup >= 255){
+        setCoderLedHL(1);
+    }
+    else if (celkovy_vystup < 255){
+        setCoderLedHL(0);
+    }
+    
     rtm(memS1.vystup, memS2.vystup); //volani funkce RTM 40ms delay je implementovan uvnitr funkce
     
     
