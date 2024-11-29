@@ -22,7 +22,7 @@
 
 
 
-void potenciometr(int* hodnota_pot_u) { // funkce prepoctu potenciometru z hodnoty -2047 a? 2047 na 0 a? 255
+void potenciometr(int* hodnota_pot_u) { // funkce prepoctu potenciometru z hodnoty -2047 az 2047 na 0 az 255
     
     
     static int realna_hodnota_pot = 0;

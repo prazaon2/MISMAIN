@@ -58,6 +58,8 @@ mem_ memS2;
 dekoder_ dekoderDEK;
 int potenciometrPOT;
 int celkovy_vystup;
+int svitiV9;
+int svitiV12;
 
 
 //---- Functions --------------------------------------------------------------
@@ -89,6 +91,9 @@ void configApplication(void){//------------------------------------------------
     potenciometrPOT = 0;
     
     celkovy_vystup = 0;
+    
+    svitiV9 = 0;
+    svitiV12 = 0;
     
   
 }// configApplication() END 
@@ -139,21 +144,25 @@ void runApplication(void) {//--------------------------------------------------
    
     if (celkovy_vystup <= 0){               //rozsviti LEDV9 kdyz je hodnota potenciometru/dekoderu minimalni
         setCoderLedLL(1);
+        svitiV9 = 1;
     }
     else if (celkovy_vystup > 0){       //zhasne LEDV9 kdyz je hodnota potenciometru/dekoderu maximalni
         setCoderLedLL(0);
+        svitiV9 = 0;
     }
     
     if (celkovy_vystup >= 255){        //rozsviti LEDV12 kdyz je hodnota potenciometru/dekoderu maximalni
         setCoderLedHL(1);
+        svitiV12 = 1;
     }
     else if (celkovy_vystup < 255){         //zhasne LEDV12 kdyz je hodnota potenciometru/dekoderu maximalni
         setCoderLedHL(0);
+        svitiV12 = 0;
     }
   //----------------------------------------------------------------------------------------------------------------------  
     
     
-    rtm(memS1.vystup, memS2.vystup); //volani funkce RTM 40ms delay je implementovan uvnitr funkce
+    rtm(memS1.vystup, memS2.vystup, svitiV9, svitiV12, celkovy_vystup); //volani funkce RTM 40ms delay je implementovan uvnitr funkce
     
     
     
