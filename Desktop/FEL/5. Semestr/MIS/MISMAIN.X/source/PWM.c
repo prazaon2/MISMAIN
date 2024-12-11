@@ -39,7 +39,9 @@ void iniOC (void) {
 }
     
 void startCasovacOC (void) {
-   
+   T2CONbits.ON = 1; // start casovace
+   OC16CONbits.ON = 1; // strt OC jednotky
+
 }
 
 
