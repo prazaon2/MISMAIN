@@ -98,7 +98,7 @@ void rtm(bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int sviti12, int POT
                     
                     break;
                 }
-                case 1:         //COM1 odesilej hodnotu potenciometru/dekoderu a stavy na ledkach ukazujici maximum a minimum
+                case 1:         //COM1 odesilej hodnotu potenciometru/dekoderu a stavy na ledkach ukazujici maximum a minimum 
                 {
                     sendBuf[0]= Three_Int_Len; //uvedeni delky zpravy
                     integerToBytes(POT_DEK,&sendBuf[1]); //priprava zpravy z potenciometru/dekoderu
@@ -116,7 +116,7 @@ void rtm(bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int sviti12, int POT
                     sendMessageUSB(sendBuf,0); //odeslani do PC
                     break;
                 }
-                case 3:     //COM3 tabulka - jalikoz nelze zapsat vice bunek najednou tak kazdy cyklus 40ms zapise jednu bunku
+                case 3:     //COM3 tabulka - jelikoz nelze zapsat vice bunek najednou tak kazdy cyklus 40ms zapise jednu bunku //zde stejne
                 {
                     
                     switch(stav_tabulka){
@@ -159,6 +159,11 @@ void rtm(bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int sviti12, int POT
                     break;
                     }
                   
+                }
+                
+                case 4:         //COM4 precte parametr 1 pokud v nem bude hodnota 0 az 255 a posle ho do PWM
+                {
+                    
                 }
             }
     }  

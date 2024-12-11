@@ -12,4 +12,10 @@
 
 void rtm(bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int sviti12, int POT_DEK);
 
+typedef struct rtmPWM_ {
+    int hodnota_par;    //zde bude zapsana hodnota parametru1 prijata pomoci rtm
+    bool stav;          //zde bude stav 1 pokud doslo k volani COM4 a zapisu parametru ve spravnem intervalu
+
+    } rtmPWM_;
+
 #endif 

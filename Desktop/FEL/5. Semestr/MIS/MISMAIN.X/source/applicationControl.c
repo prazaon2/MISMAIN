@@ -55,6 +55,7 @@ filtr_ filtrS2;
 filtr_ filtrS3;
 filtr_ filtrA;  
 filtr_ filtrB; 
+rtmPWM_ rtmCOM4;
 mem_ memS1;
 mem_ memS2;
 mem_ memS3;
@@ -96,6 +97,9 @@ void configApplication(void){//------------------------------------------------
     
     dekoderDEK.hodnota_dek = 0;
     dekoderDEK.stav = 0;
+    
+    rtmCOM4.hodnota_par = 0;
+    rtmCOM4.stav = 0;
     
     potenciometrPOT = 0;
     
