@@ -96,6 +96,10 @@ void configApplication(void){//------------------------------------------------
     svitiV9 = 0;
     svitiV12 = 0;
     
+    iniCasovac();       // provede inicializaci casovace (Timer2))
+    iniOC();            // provede inicializaci OC16 jednotky
+    startCasovacOC();   // spusti casovac i OC jednotku
+    
     
 }// configApplication() END 
 
@@ -162,6 +166,9 @@ void runApplication(void) {//--------------------------------------------------
     }
   //----------------------------------------------------------------------------------------------------------------------                                
   
+    OC16RS = ((celkovy_vystup/(255.0))*1875)+1875;  //prepocita a zapise hodnotu z dekoderu nebo reostatu do registru OC jednotky
+    
+    
     
     rtm(memS1.vystup, memS2.vystup, svitiV9, svitiV12, celkovy_vystup); //volani funkce RTM 40ms delay je implementovan uvnitr funkce
     
