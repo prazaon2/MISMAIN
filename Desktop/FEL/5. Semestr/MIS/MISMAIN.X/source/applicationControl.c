@@ -126,13 +126,14 @@ void runApplication(void) {//--------------------------------------------------
     
     mem(&memS1,filtrS1.vystup);             //volani funkce pameti jejiz vstupem je vystup z filtru tlacitka S1
     mem(&memS2,filtrS2.vystup);             //volani funkce pameti jejiz vstupem je vystup z filtru tlacitka S2
-    
+    mem(&memS3,filtrS3.vystup);             //volani funkce pameti jejiz vstupem je vystup z filtru tlacitka S3
     
     setCoderLedA(filtrA.vystup);            //rozsviceni led vyfiltrovaneho signalu koderu
     setCoderLedB(filtrB.vystup); 
     
-    setLedV1(memS1.vystup);                             //rozviceni led z pameti tlacitka S1 a S2
+    setLedV1(memS1.vystup);                             //rozviceni led z pameti tlacitka S1 az S3
     setLedV2(memS2.vystup); 
+    setLedV3(memS3.vystup); 
     
    
     dekoder(&dekoderDEK, filtrA.vystup, filtrB.vystup);     //volani fukce dekoderu - urci smer a dle nej pricita/odecita pocet hran kvadraturniho signalu na intervalu 0 az 255
@@ -183,6 +184,7 @@ void runApplication(void) {//--------------------------------------------------
     else {
     OC16RS = 1875;      // hodnota PWM bude nastavena na 1 ms
     }
+    
     
     
     rtm(memS1.vystup, memS2.vystup, svitiV9, svitiV12, celkovy_vystup); //volani funkce RTM 40ms delay je implementovan uvnitr funkce
