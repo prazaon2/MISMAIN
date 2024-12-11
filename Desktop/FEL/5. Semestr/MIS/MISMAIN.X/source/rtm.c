@@ -103,7 +103,7 @@ void rtm(bool mem_S1, bool mem_S2, int sviti9, int sviti12, int POT_DEK) { //ini
                     sendBuf[0]= Three_Int_Len; //uvedeni delky zpravy
                     integerToBytes(POT_DEK,&sendBuf[1]); //priprava zpravy z potenciometru/dekoderu
                     integerToBytes(sviti9*100,&sendBuf[3]); //priprava zpravy... hodnotu nasobim stem aby byla dobre videt v zobrazovacim SW na PC v porovnani s POT_DEK
-                    integerToBytes(sviti12*100,&sendBuf[1]); //priprava zpravy... hodnotu nasobim stem aby byla dobre videt v zobrazovacim SW na PC v porovnani s POT_DEK
+                    integerToBytes(sviti12*100,&sendBuf[5]); //priprava zpravy... hodnotu nasobim stem aby byla dobre videt v zobrazovacim SW na PC v porovnani s POT_DEK
                     sendMessageUSB(sendBuf,0); //odeslani do PC
                     break;
                 }
