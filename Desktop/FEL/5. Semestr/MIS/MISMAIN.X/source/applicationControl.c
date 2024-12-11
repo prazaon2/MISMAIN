@@ -30,6 +30,7 @@
 #include "rtm.h"
 #include "dekoder.h"
 #include "potenciometr.h"
+#include "PWM.h"
 
 
 //-- latform Function prototypes are in "platrformDEP32mk" ---------------------
@@ -95,7 +96,7 @@ void configApplication(void){//------------------------------------------------
     svitiV9 = 0;
     svitiV12 = 0;
     
-  
+    
 }// configApplication() END 
 
 //===>>>> Call it every 1ms <<<<===
@@ -159,8 +160,8 @@ void runApplication(void) {//--------------------------------------------------
         setCoderLedHL(0);
         svitiV12 = 0;
     }
-  //----------------------------------------------------------------------------------------------------------------------  
-    
+  //----------------------------------------------------------------------------------------------------------------------                                
+  
     
     rtm(memS1.vystup, memS2.vystup, svitiV9, svitiV12, celkovy_vystup); //volani funkce RTM 40ms delay je implementovan uvnitr funkce
     
