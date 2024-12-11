@@ -187,7 +187,7 @@ void runApplication(void) {//--------------------------------------------------
     
     
     
-    rtm(memS1.vystup, memS2.vystup, svitiV9, svitiV12, celkovy_vystup); //volani funkce RTM 40ms delay je implementovan uvnitr funkce
+    rtm(memS1.vystup, memS2.vystup, memS3.vystup, svitiV9, svitiV12, celkovy_vystup); //volani funkce RTM 40ms delay je implementovan uvnitr funkce
     
     
     

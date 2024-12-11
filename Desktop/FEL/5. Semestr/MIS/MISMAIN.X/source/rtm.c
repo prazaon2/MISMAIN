@@ -77,7 +77,7 @@ unsigned char recBuf[40];  //inicializace pole prichozi zpravy
 unsigned char sendBuf[40];  //inicializace pole obsahujiciho odesilanou zpravu
 
 
-void rtm(bool mem_S1, bool mem_S2, int sviti9, int sviti12, int POT_DEK) { //inicializace funkce vstupem jsou funkce mem - pameti tlacitek
+void rtm(bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int sviti12, int POT_DEK) { //inicializace funkce vstupem jsou funkce mem - pameti tlacitek
     
     static int delay = 0; 
     static char delka = 0;
@@ -107,11 +107,12 @@ void rtm(bool mem_S1, bool mem_S2, int sviti9, int sviti12, int POT_DEK) { //ini
                     sendMessageUSB(sendBuf,0); //odeslani do PC
                     break;
                 }
-                case 2:         //COM2 odesilej hodnotu tlacitek s pameti //zde stejne jako v predchozim ukolu
+                case 2:         //COM2 odesilej hodnotu tlacitek s pameti //narozdil od predeslich ukolu je zde pridano tlacitko S3
                 {
-                    sendBuf[0]= Two_Int_Len;  //uvedeni delky zpravy
+                    sendBuf[0]= Three_Int_Len;  //uvedeni delky zpravy
                     integerToBytes(mem_S1*100,&sendBuf[1]); //priprava zpravy... hodnotu nasobim stem aby byla dobre videt v zobrazovacim SW na PC
-                    integerToBytes(mem_S2*100,&sendBuf[3]);//priprava zpravy... hodnotu nasobim stem aby byla dobre videt v zobrazovacim SW na PC
+                    integerToBytes(mem_S2*100,&sendBuf[3]); //priprava zpravy... hodnotu nasobim stem aby byla dobre videt v zobrazovacim SW na PC
+                    integerToBytes(mem_S3*100,&sendBuf[5]); //priprava zpravy... hodnotu nasobim stem aby byla dobre videt v zobrazovacim SW na PC
                     sendMessageUSB(sendBuf,0); //odeslani do PC
                     break;
                 }
