@@ -52,10 +52,12 @@
 // zde deklaruju globalni promenne
 filtr_ filtrS1; 
 filtr_ filtrS2;
+filtr_ filtrS3;
 filtr_ filtrA;  
 filtr_ filtrB; 
 mem_ memS1;
 mem_ memS2;
+mem_ memS3;
 dekoder_ dekoderDEK;        //promena pro hodnotu dekoderu
 int potenciometrPOT;        //promena pro hodnotu potenciometru
 int celkovy_vystup;         //promena pro hodnotu vystupu po zvoleni dekoderu nebo potenciometru
@@ -74,6 +76,9 @@ void configApplication(void){//------------------------------------------------
     filtrS2.vystup = 0;     //inicializace pro filtr tlacitka S2
     filtrS2.stav = 0;
     
+    filtrS3.vystup = 0;     //inicializace pro filtr tlacitka S3
+    filtrS3.stav = 0;
+    
     filtrA.vystup = 0;      //inicializace pro filtr koderu kanal A 
     filtrA.stav = 0;
     
@@ -85,6 +90,9 @@ void configApplication(void){//------------------------------------------------
     
     memS2.vystup = 0;      //inicializace pro pamet tlacitka S2 
     memS2.stav = 0;
+    
+    memS3.vystup = 0;       //inicializace pro pamet tlacitka S3 
+    memS3.stav =0;
     
     dekoderDEK.hodnota_dek = 0;
     dekoderDEK.stav = 0;
@@ -113,6 +121,7 @@ void runApplication(void) {//--------------------------------------------------
     
     filtr(&filtrS1,getButtonS1());          //zde filtruji tlacitka S1 S2
     filtr(&filtrS2,getButtonS2());
+    filtr(&filtrS3,getButtonS3());
     
     
     mem(&memS1,filtrS1.vystup);             //volani funkce pameti jejiz vstupem je vystup z filtru tlacitka S1
@@ -166,8 +175,14 @@ void runApplication(void) {//--------------------------------------------------
     }
   //----------------------------------------------------------------------------------------------------------------------                                
   
+    if((memS3.vystup == 1)){        //pokud je tlacitko S3 zmackle aktivuje vstup do PWM
+        
     OC16RS = ((celkovy_vystup/(255.0))*1875)+1875;  //prepocita a zapise hodnotu z dekoderu nebo reostatu do registru OC jednotky
+    }
     
+    else {
+    OC16RS = 1875;      // hodnota PWM bude nastavena na 1 ms
+    }
     
     
     rtm(memS1.vystup, memS2.vystup, svitiV9, svitiV12, celkovy_vystup); //volani funkce RTM 40ms delay je implementovan uvnitr funkce
