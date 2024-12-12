@@ -169,6 +169,9 @@ void rtm(rtmPWM_* COM4, bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int s
                         COM4->hodnota_par = parametr1; 
                         COM4->stav = 1;             // pokud hodnota vyplnena v parametru1 nebude v zadanem intervalu nebude ani odeslana do PWM
                     }
+                    else{
+                        COM4->stav = 0;
+                    }
                 }
             }
             
