@@ -179,19 +179,24 @@ void runApplication(void) {//--------------------------------------------------
         svitiV12 = 0;
     }
   //----------------------------------------------------------------------------------------------------------------------                                
-  
+  rtm(&rtmCOM4, memS1.vystup, memS2.vystup, memS3.vystup, svitiV9, svitiV12, celkovy_vystup); //volani funkce RTM 40ms delay je implementovan uvnitr funkce
+    
+   if((rtmCOM4.stav == 1)){
+       celkovy_vystup = rtmCOM4.hodnota_par;
+   }
+    
     if((memS3.vystup == 1)){        //pokud je tlacitko S3 zmackle aktivuje vstup do PWM
         
-    OC16RS = ((celkovy_vystup/(255.0))*1875)+1875;  //prepocita a zapise hodnotu z dekoderu nebo reostatu do registru OC jednotky
+        OC16RS = ((celkovy_vystup/(255.0))*1875)+1875;  //prepocita a zapise hodnotu z dekoderu nebo reostatu do registru OC jednotky
     }
     
     else {
-    OC16RS = 1875;      // hodnota PWM bude nastavena na 1 ms
+        OC16RS = 1875;      // hodnota PWM bude nastavena na 1 ms
     }
     
     
     
-    rtm(memS1.vystup, memS2.vystup, memS3.vystup, svitiV9, svitiV12, celkovy_vystup); //volani funkce RTM 40ms delay je implementovan uvnitr funkce
+    
     
     
     

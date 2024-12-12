@@ -10,7 +10,6 @@
 #define Two_Int_Len 5   //definuju delku zpravy dvou cisel pro tlacitka s pameti
 #define Three_Int_Len 7 //definuju delku zpravy tri cisel pro tlacitka s pameti
 
-void rtm(bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int sviti12, int POT_DEK);
 
 typedef struct rtmPWM_ {
     int hodnota_par;    //zde bude zapsana hodnota parametru1 prijata pomoci rtm
@@ -18,4 +17,6 @@ typedef struct rtmPWM_ {
 
     } rtmPWM_;
 
+void rtm(rtmPWM_* COM4, bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int sviti12, int POT_DEK);
+    
 #endif 
