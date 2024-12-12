@@ -93,7 +93,7 @@ void rtm(rtmPWM_* COM4, bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int s
         getMessageUSB(recBuf,0); //pripravena funkce - prijme zpravu z PC a uloziji do pole recBuf
             delka = recBuf[0];  // na pozici 0 se nachazi informace o delce zpravy. Bude se hodit kdyz budu chtit pridat kontrolu prijate zpravy
             typ = recBuf[1];    //na pozici 1 se nachazi informace o typu prijate zpravy => jaky COM jsem vybral na PC
-            parametr1 = bytesToInteger(&recBuf[3]);
+            parametr1 = bytesToInteger(&recBuf[3]); // na pozici 3 se nachazi parametr1 je nutne ho prevest na integer
             
             switch(typ){   
                 case 0:{    //COM0 preruseni komunikace
@@ -167,13 +167,11 @@ void rtm(rtmPWM_* COM4, bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int s
                 {
                     if((parametr1 >= 0) && (parametr1 <= 255)){
                         COM4->hodnota_par = parametr1; 
-                        COM4->stav = 1;
+                        COM4->stav = 1;             // pokud hodnota vyplnena v parametru1 nebude v zadanem intervalu nebude ani odeslana do PWM
                     }
                 }
             }
-            if (typ != 4){
-                COM4->stav = 0;
-            }
+            
     }  
 }
         

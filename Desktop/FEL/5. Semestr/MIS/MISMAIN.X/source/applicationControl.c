@@ -178,21 +178,27 @@ void runApplication(void) {//--------------------------------------------------
         setCoderLedHL(0);
         svitiV12 = 0;
     }
-  //----------------------------------------------------------------------------------------------------------------------                                
+  //-----------------------zde volame RTM------------------------------------------------------------                                
   rtm(&rtmCOM4, memS1.vystup, memS2.vystup, memS3.vystup, svitiV9, svitiV12, celkovy_vystup); //volani funkce RTM 40ms delay je implementovan uvnitr funkce
-    
-   if((rtmCOM4.stav == 1) && (memS1.vystup == 1)){
+   
+  
+  
+   //----------------------zde se rozhoduje zda je bereme hodnotu z DEK nebo RTM------------------------------------------------------
+   
+  if((rtmCOM4.stav == 1) && (memS1.vystup == 1)){ //pokud prisla spravna hodnota do COM4 a tlacitkoS1/diodaV1  je aktivni tak na vstupu PWM prepise hodnotu z DEK na hodotu z RTM
        celkovy_vystup = rtmCOM4.hodnota_par;
    }
-    
-    if(memS3.vystup == 1){        //pokud je tlacitko S3 zmackle aktivuje vstup do PWM
-        
+   
+  
+  
+  //----------------------zde se rozhoduje zda odesilat hodnotu z DEK/RTM nebo odesilat pouze nulovou hodnotu--------------------------------------------------
+   if(memS3.vystup == 1){        //pokud je tlacitko S3 zmackle aktivuje vstup do PWM        
         OC16RS = ((celkovy_vystup/(255.0))*1875)+1875;  //prepocita a zapise hodnotu z dekoderu nebo reostatu do registru OC jednotky
-    }
+   }
     
-    else {
+   else {
         OC16RS = 1875;      // hodnota PWM bude nastavena na 1 ms "nulová hodnota"
-    }
+   }
     
     
     
