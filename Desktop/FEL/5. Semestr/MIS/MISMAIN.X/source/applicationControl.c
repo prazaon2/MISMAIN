@@ -53,6 +53,11 @@
 filtr_ filtrS1; 
 filtr_ filtrS2;
 filtr_ filtrS3;
+filtr_ filtrS4; 
+filtr_ filtrS5;
+filtr_ filtrS6;
+filtr_ filtrS7; 
+filtr_ filtrS8;
 filtr_ filtrA;  
 filtr_ filtrB; 
 rtmPWM_ rtmCOM4;
@@ -79,6 +84,21 @@ void configApplication(void){//------------------------------------------------
     
     filtrS3.vystup = 0;     //inicializace pro filtr tlacitka S3
     filtrS3.stav = 0;
+    
+    filtrS4.vystup = 0;     //inicializace pro filtr tlacitka S4
+    filtrS4.stav = 0;
+    
+    filtrS5.vystup = 0;     //inicializace pro filtr tlacitka S5
+    filtrS5.stav = 0;
+    
+    filtrS6.vystup = 0;     //inicializace pro filtr tlacitka S6
+    filtrS6.stav = 0;
+    
+    filtrS7.vystup = 0;     //inicializace pro filtr tlacitka S7
+    filtrS7.stav = 0;
+    
+    filtrS8.vystup = 0;     //inicializace pro filtr tlacitka S8
+    filtrS8.stav = 0;
     
     filtrA.vystup = 0;      //inicializace pro filtr koderu kanal A 
     filtrA.stav = 0;
