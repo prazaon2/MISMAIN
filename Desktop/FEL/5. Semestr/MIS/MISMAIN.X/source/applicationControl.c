@@ -31,6 +31,7 @@
 #include "dekoder.h"
 #include "potenciometr.h"
 #include "PWM.h"
+#include "plc.h"
 
 
 //-- latform Function prototypes are in "platrformDEP32mk" ---------------------

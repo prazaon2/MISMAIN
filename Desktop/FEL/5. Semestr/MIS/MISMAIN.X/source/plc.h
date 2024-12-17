@@ -18,7 +18,8 @@
 #ifndef _PLC_H    /* Guard against multiple inclusion */
 #define _PLC_H
 
-
+#include "platformMIS32mk.h"
+#include "PWM.h"
 
 
 typedef struct plc_{
