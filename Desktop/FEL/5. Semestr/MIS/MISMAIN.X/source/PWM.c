@@ -29,8 +29,8 @@ void iniCasovac (void){
 
 void iniOC (void) {
     OC16CON = 0; // zastavi OC jednotku
-    OC1CONbits.OC32 = 0; // nastavi 16ti bitovy mod
-    OC1CONbits.OCM = 0b110; // nastaveni rezimu PWM without
+    OC16CONbits.OC32 = 0; // nastavi 16ti bitovy mod
+    OC16CONbits.OCM = 0b110; // nastaveni rezimu PWM without
     OC16R = 1875; // inicializace primarniho compare registruc, hodnota 1875 reprezentuje 1ms
     OC16RS = 1875; // inicializace sekundarniho compare registru
     OC16CONbits.SIDL = 0; // neprarusi operaci v idle modu

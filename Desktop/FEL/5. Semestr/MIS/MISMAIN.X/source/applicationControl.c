@@ -99,7 +99,7 @@ void configApplication(void){//------------------------------------------------
     dekoderDEK.stav = 0;
     
     rtmCOM4.hodnota_par = 0;
-    rtmCOM4.stav = 0;
+    //rtmCOM4.stav = 0;
     
     potenciometrPOT = 0;
     
@@ -146,18 +146,11 @@ void runApplication(void) {//--------------------------------------------------
     
     
     
-    //----------------------zde rozhoduje zda je nastaven dekoder nebo poteciometr------------------------------------------------------
     
-    if((memS2.vystup) == 1){                                
-        celkovy_vystup = dekoderDEK.hodnota_dek;
-    }
     
-    else if((memS2.vystup) == 0){
-        celkovy_vystup = potenciometrPOT;
-    }
     //----------------------------------------------------------------------------------------------------------------------
     
-    setFpgaVxValue(celkovy_vystup); //rozsvici led 13 az 24 dle celkove vystupni hodnoty
+
     
     //---------zde se rozsvici/zahsina led V9 a V12 pri dosazeni maxima/minima celkove vystupni hodnoty------------------------------------------------------
    
@@ -185,10 +178,21 @@ void runApplication(void) {//--------------------------------------------------
   
    //----------------------zde se rozhoduje zda je bereme hodnotu z DEK nebo RTM------------------------------------------------------
    
-  if((rtmCOM4.stav == 1) && (memS1.vystup == 1)){ //pokud prisla spravna hodnota do COM4 a tlacitkoS1/diodaV1  je aktivni tak na vstupu PWM prepise hodnotu z DEK na hodotu z RTM
+  if(memS1.vystup == 1){ //pokud prisla spravna hodnota do COM4 a tlacitkoS1/diodaV1  je aktivni tak na vstupu PWM prepise hodnotu z DEK na hodotu z RTM
        celkovy_vystup = rtmCOM4.hodnota_par;
    }
-   
+  
+  else{
+    if((memS2.vystup) == 1){                                
+        celkovy_vystup = dekoderDEK.hodnota_dek;
+    }
+    
+    else if((memS2.vystup) == 0){
+        celkovy_vystup = potenciometrPOT;
+    }
+  }
+ 
+  setFpgaVxValue(celkovy_vystup); //rozsvici led 13 az 24 dle celkove vystupni hodnoty
   
   
   //----------------------zde se rozhoduje zda odesilat hodnotu z DEK/RTM nebo odesilat pouze nulovou hodnotu--------------------------------------------------

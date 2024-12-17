@@ -13,7 +13,7 @@
 
 typedef struct rtmPWM_ {
     int hodnota_par;    //zde bude zapsana hodnota parametru1 prijata pomoci rtm
-    bool stav;          //zde bude stav 1 pokud doslo k volani COM4 a zapisu parametru ve spravnem intervalu
+    //bool stav;          //zde bude stav 1 pokud doslo k volani COM4 a zapisu parametru ve spravnem intervalu
 
     } rtmPWM_;
 
