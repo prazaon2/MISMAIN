@@ -146,6 +146,12 @@ void runApplication(void) {//--------------------------------------------------
     filtr(&filtrS1,getButtonS1());          //zde filtruji tlacitka S1 S2
     filtr(&filtrS2,getButtonS2());
     filtr(&filtrS3,getButtonS3());
+    filtr(&filtrS4,getButtonS4());
+    filtr(&filtrS5,getButtonS5());
+    filtr(&filtrS6,getButtonS6());
+    filtr(&filtrS7,getButtonS7());
+    filtr(&filtrS8,getButtonS8());
+    
     
     
     mem(&memS1,filtrS1.vystup);             //volani funkce pameti jejiz vstupem je vystup z filtru tlacitka S1

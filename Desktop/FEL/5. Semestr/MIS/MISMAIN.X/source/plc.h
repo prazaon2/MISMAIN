@@ -36,7 +36,7 @@ typedef struct plc_{
     int h10;
 }plc_;
 
-void plc(plc_* plc, int vstup);
+void plc(plc_* plc, int vstup_zatezovatel, int vstupS4, int vstupS5, int vstupS6, int vstupS7, int vstupS8);
 
 
 #endif 
