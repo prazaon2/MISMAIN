@@ -20,16 +20,17 @@
 void plc(plc_* plc, int vstup_zatezovatel, int vstupS4, int vstupS5, int vstupS6, int vstupS7, int vstupS8) { 
     
     int static index = 0;
+    int static index2 = 0;
     int static zapsano = 1;
     static int delay = 0;
-    int SETpole[10];
+    static int SETpole[10];
     
     switch(plc->stav){
         
         case 0: //PROG
         {
-            
-            if(vstupS7 == 1 && index < 9 && zapsano == 1){
+            index2 = 0;
+            if(vstupS7 == 1 && index < 10 && zapsano == 1){
                 zapsano = 0;
                 switch(index){
                     case 0:
@@ -113,17 +114,22 @@ void plc(plc_* plc, int vstup_zatezovatel, int vstupS4, int vstupS5, int vstupS6
         case 1: //RUN
         {
             index = 0;
+            
             delay++;
             if(delay >= 1000){
                 
-                OC16RS = SETpole[index];
-                index++;
+                OC16RS = ((SETpole[index2]/(255.0))*1875)+1875;
+                index2++;
                 delay=0;
+            }
+            if(index2 > 9){
+                index = 0;
             }
             
             if(vstupS4 == 1){
                 plc->stav = 2;
             }
+            
             
             
             

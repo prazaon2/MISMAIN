@@ -70,7 +70,7 @@ int potenciometrPOT;        //promena pro hodnotu potenciometru
 int celkovy_vystup;         //promena pro hodnotu vystupu po zvoleni dekoderu nebo potenciometru
 int svitiV9;                //pomocna promena pro zobrazeni stavu LEDV9 v RTM
 int svitiV12;               //pomocna promena pro zobrazeni stavu LEDV12 v RTM
-
+plc_ plc1;
 
 //---- Functions --------------------------------------------------------------
 
@@ -223,16 +223,16 @@ void runApplication(void) {//--------------------------------------------------
   
   
   //----------------------zde se rozhoduje zda odesilat hodnotu z DEK/RTM nebo odesilat pouze nulovou hodnotu--------------------------------------------------
-   if(memS3.vystup == 1){        //pokud je tlacitko S3 zmackle aktivuje vstup do PWM        
+   /*if(memS3.vystup == 1){        //pokud je tlacitko S3 zmackle aktivuje vstup do PWM        
         OC16RS = ((celkovy_vystup/(255.0))*1875)+1875;  //prepocita a zapise hodnotu z dekoderu nebo reostatu do registru OC jednotky
    }
     
    else {
         OC16RS = 1875;      // hodnota PWM bude nastavena na 1 ms "nulová hodnota"
    }
+    */
     
-    
-    
+  plc(&plc1, celkovy_vystup, filtrS4.vystup, filtrS5.vystup, filtrS6.vystup, filtrS7.vystup, filtrS8.vystup); 
     
     
     
