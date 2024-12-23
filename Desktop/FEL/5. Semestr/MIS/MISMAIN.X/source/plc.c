@@ -36,61 +36,51 @@ void plc(plc_* plc, int vstup_zatezovatel, int vstupS4, int vstupS5, int vstupS6
                 switch(index){
                     case 0:
                     {
-                        plc->h1 = vstup_zatezovatel;
                         SETpole[0] = vstup_zatezovatel;
                         break;
                     }
                     case 1:
                     {
-                        plc->h2 = vstup_zatezovatel;
                         SETpole[1] = vstup_zatezovatel;
                         break;
                     }
                     case 2:
                     {
-                        plc->h3 = vstup_zatezovatel;
                         SETpole[2] = vstup_zatezovatel;
                         break;
                     }
                     case 3:
                     {
-                        plc->h4 = vstup_zatezovatel;
                         SETpole[3] = vstup_zatezovatel;
                         break;
                     }
                     case 4:
                     {
-                        plc->h5 = vstup_zatezovatel;
                         SETpole[4] = vstup_zatezovatel;
                         break;
                     }
                     case 5:
                     {
-                        plc->h6 = vstup_zatezovatel;
                         SETpole[5] = vstup_zatezovatel;
                         break;
                     }
                     case 6:
                     {
-                        plc->h7 = vstup_zatezovatel;
                         SETpole[6] = vstup_zatezovatel;
                         break;
                     }
                     case 7:
                     {
-                        plc->h8 = vstup_zatezovatel;
                         SETpole[7] = vstup_zatezovatel;
                         break;
                     }
                     case 8:
                     {
-                        plc->h9 = vstup_zatezovatel;
                         SETpole[8] = vstup_zatezovatel;
                         break;
                     }
                      case 9:
                     {
-                        plc->h10 = vstup_zatezovatel;
                         SETpole[9] = vstup_zatezovatel;
                         break;
                     }
@@ -134,7 +124,7 @@ void plc(plc_* plc, int vstup_zatezovatel, int vstupS4, int vstupS5, int vstupS6
                 index2++;
                 delay=0;
             }
-            if(index2 > pocet_zapsani){
+            if(index2 >= pocet_zapsani){
                 index2 = 0;
             }
             
@@ -145,11 +135,9 @@ void plc(plc_* plc, int vstup_zatezovatel, int vstupS4, int vstupS5, int vstupS6
                 plc->stav = 2;
             }
             
-            
-            
-            
             break;
         }
+        
         case 2: //STOP
         {
             if(vstupS5 == 1){
@@ -159,16 +147,10 @@ void plc(plc_* plc, int vstup_zatezovatel, int vstupS4, int vstupS5, int vstupS6
         }
         case 3:  //RESET
         {
-            plc->h1 = 0;
-            plc->h2 = 0;
-            plc->h3 = 0;
-            plc->h4 = 0;
-            plc->h5 = 0;
-            plc->h6 = 0;
-            plc->h7 = 0;
-            plc->h8 = 0;
-            plc->h9 = 0;
-            plc->h10 = 0;
+            plc->rtm_index = 0;
+            plc->rtm_zatezovatel = 0;
+            plc->rtm_stav = 0;
+            
             
             for(int i = 0; i<10; i++){
                 SETpole[i] = 0;
@@ -181,7 +163,15 @@ void plc(plc_* plc, int vstup_zatezovatel, int vstupS4, int vstupS5, int vstupS6
         case 4: //TEST
         {
             
+            
+            
+        if(vstupS5 == 1){
+                plc->stav = 1;
+            }
         
+        if(vstupS6 == 1){
+                plc->stav = 3;
+            }
         
         }
     }
