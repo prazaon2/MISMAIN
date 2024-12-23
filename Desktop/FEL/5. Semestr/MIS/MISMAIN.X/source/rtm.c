@@ -84,7 +84,7 @@ void rtm(rtmPWM_* COM4, bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int s
     static char typ = 0;
     static char parametr1 = 0;
     static int stav_tabulka = 0;
-  
+    static int stav_tabulkaPLC = 0;
     
     delay = delay+1; //inkcementace
     
@@ -172,6 +172,64 @@ void rtm(rtmPWM_* COM4, bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int s
                    // else{
                     //    COM4->stav = 0;
                  //   }
+                    break;
+                }
+                
+                case 5: //COM5 pro ulohu PLC
+                {
+                    switch(stav_tabulkaPLC){
+                        case 0: //zapis prvni bunky
+                        {   
+                            switch(plcSTAV){
+                                case 0: //PROG
+                                {
+                                    sprintf(sendBuf,"Prog"); 
+                                    sendTableTerminalMessageUSB("1A",sendBuf); 
+                                    break;
+                                }
+                                
+                                case 1: //RUN
+                                {
+                                    sprintf(sendBuf,"Run"); 
+                                    sendTableTerminalMessageUSB("1A",sendBuf);
+                                    break;
+                                }
+                                
+                                case 2: //STOP
+                                {
+                                    sprintf(sendBuf,"Stop"); 
+                                    sendTableTerminalMessageUSB("1A",sendBuf);
+                                    break;
+                                }
+                                
+                                case 4: //TEST
+                                {
+                                    sprintf(sendBuf,"Test"); 
+                                    sendTableTerminalMessageUSB("1A",sendBuf);
+                                    break;
+                                }
+                            
+                            }
+                          
+                            stav_tabulkaPLC = 1;
+                            break;
+                        }
+                        case 1:         //zapis druhe bunky
+                        {
+                            sprintf(sendBuf,"index = %d", plcINDEX); //za %d se dosadi hodnota memS1
+                            sendTableTerminalMessageUSB("1B",sendBuf); //odesle zpravu do druhe bunky tabulky 
+                            stav_tabulkaPLC = 2;
+                            break;
+                        }
+                        case 2:         //zapis treti bunky
+                        {
+                            sprintf(sendBuf,"zatezovatel = %d", plcZATEZOVATEL); //za %d se dosadi hodnota memS2
+                            sendTableTerminalMessageUSB("1C",sendBuf); //odesle zpravu do treti bunky tabulky 
+                            stav_tabulkaPLC = 0;
+                            break;
+                        }
+                        
+                    }
                     break;
                 }
             }
