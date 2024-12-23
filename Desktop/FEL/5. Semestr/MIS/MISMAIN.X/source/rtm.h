@@ -17,6 +17,6 @@ typedef struct rtmPWM_ {
 
     } rtmPWM_;
 
-void rtm(rtmPWM_* COM4, bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int sviti12, int POT_DEK);
+void rtm(rtmPWM_* COM4, bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int sviti12, int POT_DEK, int plcSTAV, int plcINDEX, int plcZATEZOVATEL);
     
 #endif 

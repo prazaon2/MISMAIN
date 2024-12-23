@@ -77,7 +77,7 @@ unsigned char recBuf[40];  //inicializace pole prichozi zpravy
 unsigned char sendBuf[40];  //inicializace pole obsahujiciho odesilanou zpravu
 
 
-void rtm(rtmPWM_* COM4, bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int sviti12, int POT_DEK) { //inicializace funkce vstupem jsou funkce mem - pameti tlacitek
+void rtm(rtmPWM_* COM4, bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int sviti12, int POT_DEK, int plcSTAV, int plcINDEX, int plcZATEZOVATEL) { //inicializace funkce vstupem jsou funkce mem - pameti tlacitek
     
     static int delay = 0; 
     static char delka = 0;

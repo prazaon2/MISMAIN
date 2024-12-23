@@ -15,8 +15,8 @@
  */
 /* ************************************************************************** */
 
-#ifndef _255NA90_H    /* Guard against multiple inclusion */
-#define _255NA90_H
+#ifndef _PREPOCET_STUPNE_H    /* Guard against multiple inclusion */
+#define _PREPOCET_STUPNE_H
 
 
 #include "platformMIS32mk.h"
