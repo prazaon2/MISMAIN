@@ -96,7 +96,8 @@ void plc(plc_* plc, int vstup_zatezovatel, int vstupS4, int vstupS5, int vstupS6
                     
                      
                 }
-                index++;    
+                index++;   
+                pocet_zapsani = index;  //Uloti pocet zapsanych zatezovatlu v rezimu PROG
                
             
             }
@@ -106,6 +107,7 @@ void plc(plc_* plc, int vstup_zatezovatel, int vstupS4, int vstupS5, int vstupS6
             
             if(vstupS5 == 1){   // pokud zmacknu S5 spusti rezim RUN (nejnizsi priorita)
                 plc->stav = 1;
+                
             }
             
             if(vstupS8 == 1){   // pokud zmacknu S8 spusti rezim TEST
@@ -124,7 +126,7 @@ void plc(plc_* plc, int vstup_zatezovatel, int vstupS4, int vstupS5, int vstupS6
         case 1: //RUN
         {
             plc->rtm_stav = 1;  //odesle hodnotu stavu do RTM
-            pocet_zapsani = index;  //Uloti pocet zapsanych zatezovatlu v rezimu PROG
+            
             index = 0;  //reset indexu pro jine stavy, aby vzdy zacilai od 0 kdy? dojde k prepnuti
             indexTEST = 0;
             
