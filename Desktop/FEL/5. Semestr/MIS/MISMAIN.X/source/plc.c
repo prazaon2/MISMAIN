@@ -139,7 +139,7 @@ void plc(plc_* plc, int vstup_zatezovatel, int vstupS4, int vstupS5, int vstupS6
                 indexRUN++;
                 delay=0;    //reset delaye
             }
-            if(indexRUN > pocet_zapsani){   //pokud dojde az na konec pole resetuje index a hodnoty se budou opakovat
+            if(indexRUN >= pocet_zapsani){   //pokud dojde az na konec pole resetuje index a hodnoty se budou opakovat
                 indexRUN = 0;
             }
             
@@ -161,6 +161,9 @@ void plc(plc_* plc, int vstup_zatezovatel, int vstupS4, int vstupS5, int vstupS6
             
             if(vstupS5 == 1){   //pokudzmacknu tlacitko S5 bude stav RUN pokracovat v behu tam kde skoncil
                 plc->stav = 1;
+            }
+            if(vstupS6 == 1){   // pokud zmacknu S6 spusti rezim RESET (nejvyssi priorita v tomto stavu)
+                plc->stav = 3;
             }
             break;
         }
@@ -193,7 +196,7 @@ void plc(plc_* plc, int vstup_zatezovatel, int vstupS4, int vstupS5, int vstupS6
                 indexTEST++;
                 delayTEST = 0;
             }
-            if(indexTEST > pocet_zapsani){  //opakovani po preteceni vsech ulozenych hodnot
+            if(indexTEST >= pocet_zapsani){  //opakovani po preteceni vsech ulozenych hodnot
                 indexTEST = 0;  
             }
             
