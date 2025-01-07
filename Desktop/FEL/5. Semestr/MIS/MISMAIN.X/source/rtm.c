@@ -178,9 +178,9 @@ void rtm(rtmPWM_* COM4, bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int s
                 case 5: //COM5 pro ulohu PLC
                 {
                     switch(stav_tabulkaPLC){
-                        case 0: //zapis prvni bunky
+                        case 0: //zapis stavu do bunky
                         {   
-                            switch(plcSTAV){
+                            switch(plcSTAV){        //zvoli dle akrualniho stavu PLC
                                 case 0: //PROG
                                 {
                                     sprintf(sendBuf,"Prog"); 
@@ -214,14 +214,14 @@ void rtm(rtmPWM_* COM4, bool mem_S1, bool mem_S2, bool mem_S3, int sviti9, int s
                             stav_tabulkaPLC = 1;
                             break;
                         }
-                        case 1:         //zapis druhe bunky
+                        case 1:         //zapis indexu do bunky
                         {
                             sprintf(sendBuf,"index = %d", plcINDEX); //za %d se dosadi hodnota memS1
                             sendTableTerminalMessageUSB("1B",sendBuf); //odesle zpravu do druhe bunky tabulky 
                             stav_tabulkaPLC = 2;
                             break;
                         }
-                        case 2:         //zapis treti bunky
+                        case 2:         //zapis zatezovatele do bunky
                         {
                             sprintf(sendBuf,"zatezovatel = %d", plcZATEZOVATEL); //za %d se dosadi hodnota memS2
                             sendTableTerminalMessageUSB("1C",sendBuf); //odesle zpravu do treti bunky tabulky 

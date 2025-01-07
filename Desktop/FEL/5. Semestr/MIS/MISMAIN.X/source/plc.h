@@ -24,10 +24,10 @@
 
 typedef struct plc_{
     
-    char stav;
-    int rtm_index;
-    int rtm_zatezovatel;
-    int rtm_stav;
+    char stav;      // stav pro stavovy automat v PLC
+    int rtm_index;  //index (poradi ulozeneho zatezovatele) odesilany do RTM
+    int rtm_zatezovatel;    //hodnota zatezovatale odesilana do RTM
+    int rtm_stav;   // stav pro odesilani do RTM (slo by vyuzit i stav jiz pouzivany v plc, mozno pro budouci vylepseni)
     
 }plc_;
 
